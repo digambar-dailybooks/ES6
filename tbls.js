@@ -1,4 +1,7 @@
-module.exports = function (finyear) {
+module.exports = function (finyear,curryear) {
+
+    console.log("finyear"+finyear+"--"+curryear);
+
     this.master = { Address: "address",
                     City: "city",
                     Company: "company",
@@ -40,7 +43,7 @@ module.exports = function (finyear) {
                     Import: "import"};
 
     let data='';
-    if(finyear){
+    if(finyear!=curryear){
         data = {Acct_LedgerTxn: finyear+"_acct_ledgertxn",
                 Acct_PaymentDetails: finyear+"_acct_paymentdetails",
                 Acct_Tdstxn: finyear+"_acct_tdstxn",
@@ -150,8 +153,8 @@ module.exports = function (finyear) {
     
     this.txn=data;
     this.tbls = function () {
-        if(finyear){
-        return { ...this.master, ...this.txn };
+        if(finyear!=curryear){
+            return { ...this.master, ...this.txn };
         }else{
             return {...this.txn};  
         }
